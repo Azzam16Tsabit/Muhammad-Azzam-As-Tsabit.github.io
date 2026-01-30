@@ -40,113 +40,7 @@ document.querySelectorAll('.view-btn').forEach(btn => {
       window.location.href = 'kti.html';
     }
   });
-});
-
-// Script untuk galeri carousel
-document.addEventListener('DOMContentLoaded', function() {
-  const slider = document.querySelector('.gallery-slider');
-  const images = slider.querySelectorAll('img');
-  const prevBtn = document.querySelector('.prev-btn');
-  const nextBtn = document.querySelector('.next-btn');
-  const indicators = document.querySelector('.gallery-indicators');
-  let currentIndex = 0;
-
-  // Buat indikator titik
-  images.forEach((_, index) => {
-    const dot = document.createElement('span');
-    dot.classList.add('indicator');
-    if (index === 0) dot.classList.add('active');
-    dot.addEventListener('click', () => goToSlide(index));
-    indicators.appendChild(dot);
-  });
-
-  const dots = indicators.querySelectorAll('.indicator');
-
-  // Fungsi untuk mendeteksi orientasi dan set style gambar
-  function setImageOrientation(img) {
-    img.onload = function() {
-      const aspectRatio = img.naturalWidth / img.naturalHeight;
-      if (aspectRatio > 1) {
-        // Landscape: gunakan cover
-        img.style.objectFit = 'cover';
-        img.style.backgroundColor = 'transparent'; // Tidak perlu background hitam
-      } else {
-        // Portrait: gunakan contain dan background hitam
-        img.style.objectFit = 'contain';
-        img.style.backgroundColor = '#000'; // Hitamkan sisi kanan-kiri
-      }
-    };
-    // Jika gambar sudah loaded, panggil langsung
-    if (img.complete) img.onload();
-  }
-
-  // Terapkan pada semua gambar
-  images.forEach(setImageOrientation);
-
-  function updateSlider() {
-    slider.style.transform = `translateX(-${currentIndex * 100}%)`;
-    dots.forEach((dot, index) => {
-      dot.classList.toggle('active', index === currentIndex);
-    });
-  }
-
-  function goToSlide(index) {
-    currentIndex = index;
-    updateSlider();
-  }
-
-  prevBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex > 0) ? currentIndex - 1 : images.length - 1;
-    updateSlider();
-  });
-
-  nextBtn.addEventListener('click', () => {
-    currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-    updateSlider();
-  });
-
-  // Auto-slide opsional (hapus jika tidak diinginkan)
-  setInterval(() => {
-    currentIndex = (currentIndex < images.length - 1) ? currentIndex + 1 : 0;
-    updateSlider();
-  }, 5000); // Ganti setiap 5 detik
-});
-
-// Script untuk modal gambar penuh
-document.addEventListener('DOMContentLoaded', function() {
-  const modal = document.getElementById('image-modal');
-  const modalImg = document.getElementById('modal-image');
-  const closeBtn = document.querySelector('.modal-close');
-  const images = document.querySelectorAll('.gallery-slider img');
-
-  // Fungsi buka modal
-  images.forEach(img => {
-    img.addEventListener('click', function() {
-      modal.style.display = 'flex'; // Tampilkan modal
-      modalImg.src = this.src; // Set gambar modal ke gambar yang diklik
-      modalImg.alt = this.alt;
-    });
-  });
-
-  // Fungsi tutup modal
-  closeBtn.addEventListener('click', function() {
-    modal.style.display = 'none';
-  });
-
-  // Tutup modal jika klik di luar gambar
-  modal.addEventListener('click', function(event) {
-    if (event.target === modal) {
-      modal.style.display = 'none';
-    }
-  });
-
-  // Tutup modal dengan tombol Escape
-  document.addEventListener('keydown', function(event) {
-    if (event.key === 'Escape' && modal.style.display === 'flex') {
-      modal.style.display = 'none';
-    }
-  });
-});
+})
 
 // Fungsi untuk Ikon Kirim Pesan Sticky
 document.addEventListener('DOMContentLoaded', function() {
@@ -237,4 +131,63 @@ document.addEventListener('DOMContentLoaded', function() {
   document.addEventListener('touchend', function() {
     isDragging = false;
   });
+});
+
+// Data galeri untuk Education dan Certifications (sesuaikan path gambar)
+const galleries = {
+  education: [
+    'lamp/education/image1.jpg'
+  ],
+  certifications: [
+    'lamp/certification/image1.jpg'
+  ]
+};
+
+let currentGallery = [];
+
+// Script untuk modal gambar penuh
+document.addEventListener('DOMContentLoaded', function() {
+  const modal = document.getElementById('image-modal');
+  const modalImg = document.getElementById('modal-image');
+  const closeBtn = document.querySelector('.modal-close');
+
+  // Fungsi buka modal
+    document.querySelectorAll('.gallery-toggle').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const gambar = btn.getAttribute('data-gallery');
+        modal.style.display = 'flex'; // Tampilkan modal
+        modalImg.src = galleries[gambar]; // Set gambar modal ke gambar yang diklik
+        modalImg.alt = this.alt;
+      });
+    });
+
+  // Fungsi tutup modal
+  closeBtn.addEventListener('click', function() {
+    modal.style.display = 'none';
+  });
+
+  // Tutup modal jika klik di luar gambar
+  modal.addEventListener('click', function(event) {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+
+  // Tutup modal dengan tombol Escape
+  document.addEventListener('keydown', function(event) {
+    if (event.key === 'Escape' && modal.style.display === 'flex') {
+      modal.style.display = 'none';
+    }
+  });
+});
+
+document.querySelectorAll('.section').forEach(section => {
+    section.addEventListener('mouseenter', () => {
+        const toggle = section.querySelector('.gallery-toggle');
+        if (toggle) toggle.style.display = 'block';
+    });
+    section.addEventListener('mouseleave', () => {
+        const toggle = section.querySelector('.gallery-toggle');
+        if (toggle) toggle.style.display = 'none';
+    });
 });

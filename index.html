@@ -90,6 +90,7 @@
 
       <section id="education" class="section">
         <h2>Education</h2>
+        <button class="gallery-toggle" data-gallery="education"><i class="fas fa-eye"></i></button>
         <div class="education-item">
           <h3>Bachelor of Engineering: Energy System Engineering</h3>
           <p>Institut Teknologi Sumatera – Lampung, Indonesia</p>
@@ -105,6 +106,7 @@
 
       <section id="certifications" class="section">
         <h2>Certifications</h2>
+        <button class="gallery-toggle" data-gallery="certifications"><i class="fas fa-eye"></i></button>
         <ul>
           <li>Licensed Construction and Installation Solar PV - 3 years (09/2023)</li>
         </ul>
@@ -211,7 +213,10 @@
     </a>
   </div>
 
-  <script src="script.js"></script>
+  <div id="image-modal" class="modal">
+    <span class="modal-close">&times;</span>
+    <img class="modal-content" id="modal-image" alt="Full Image">
+  </div>
 
   <footer class="copyright-footer">
     <p>©2026 Muhammad Azzam As Tsabit</p>

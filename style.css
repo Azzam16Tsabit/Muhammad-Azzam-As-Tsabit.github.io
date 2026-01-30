@@ -86,20 +86,6 @@ body.light-mode .section h2 {
   line-height: 1.6;
 }
 
-/* Contact di footer: tanpa panel */
-.contact-footer {
-  text-align: center;
-  padding: 20px;
-  background: transparent;
-  color: #e5e7eb;
-  margin-top: 20px;
-}
-
-.contact-footer h2 {
-  color: #38bdf8;
-  margin-bottom: 15px;
-}
-
 /* Container untuk sections: berurutan vertikal */
 .sections-container {
   display: flex;
@@ -117,6 +103,7 @@ body.light-mode .section h2 {
   color: #e5e7eb;
   box-sizing: border-box;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
+  position: relative;
 }
 
 .section:hover {
@@ -200,11 +187,6 @@ body.light-mode .project-card {
 
 body.light-mode header h1, body.light-mode header p {
   color: #000000; /* Judul header hitam tebal */
-  font-weight: bold;
-}
-
-body.light-mode .contact-footer h2, body.light-mode .contact-footer p {
-  color: #000000; /* Contact footer hitam tebal */
   font-weight: bold;
 }
 
@@ -442,55 +424,6 @@ body.light-mode .indicator.active {
   }
 }
 
-/* Modal Styles */
-.modal {
-  display: none; /* Tersembunyi secara default */
-  position: fixed;
-  z-index: 1000; /* Di atas semua elemen */
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.9); /* Overlay hitam semi-transparan */
-  justify-content: center;
-  align-items: center;
-}
-
-.modal-content {
-  max-width: 90%;
-  max-height: 90%;
-  object-fit: contain; /* Gambar fit penuh tanpa crop */
-  background-color: #000; /* Background hitam untuk letterboxing jika portrait */
-}
-
-.modal-close {
-  position: absolute;
-  top: 15px;
-  right: 35px;
-  color: #f1f5f9;
-  font-size: 40px;
-  font-weight: bold;
-  cursor: pointer;
-  transition: color 0.3s ease;
-}
-
-.modal-close:hover,
-.modal-close:focus {
-  color: #bbb;
-}
-
-/* Responsive untuk modal */
-@media (max-width: 768px) {
-  .modal-content {
-    max-width: 95%;
-    max-height: 95%;
-  }
-  .modal-close {
-    font-size: 30px;
-    right: 20px;
-  }
-}
-
 .language-item {
   display: flex;
   justify-content: space-between;
@@ -681,5 +614,75 @@ body.light-mode .social-link:hover {
   }
   .social-popup {
     bottom: 75px;
+  }
+}
+
+.gallery-toggle {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  background: transparent;
+  border: none;
+  color: #38bdf8;
+  font-size: 1.5rem;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+.gallery-toggle:hover {
+  color: #0ea5e9;
+}
+body.light-mode .gallery-toggle {
+  color: #1e293b;
+}
+body.light-mode .gallery-toggle:hover {
+  color: #0f172a;
+}
+
+/* Modal Styles */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1000;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.9);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  max-width: 90%;
+  max-height: 90%;
+  object-fit: contain;
+  background-color: #000;
+}
+
+.modal-close {
+  position: absolute;
+  top: 15px;
+  right: 35px;
+  color: #f1f5f9;
+  font-size: 40px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.3s ease;
+}
+
+.modal-close:hover,
+.modal-close:focus {
+  color: #bbb;
+}
+
+/* Responsive untuk modal */
+@media (max-width: 768px) {
+  .modal-content {
+    max-width: 95%;
+    max-height: 95%;
+  }
+  .modal-close {
+    font-size: 30px;
+    right: 20px;
   }
 }
